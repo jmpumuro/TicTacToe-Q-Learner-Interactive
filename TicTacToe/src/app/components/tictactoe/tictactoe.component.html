@@ -1,0 +1,64 @@
+
+<div class="game-container">
+    
+
+    <div class = "container">
+
+    <div class="training-container">
+        <div class="training-card">
+            <p>TRAINING</p>
+            <div class="button-container">
+                <button class="mat-button-like train" (click)="trainAgent()" >Train</button>
+                <button class="mat-button-like play" (click)="Play()" [ngClass]="{'disabled-button': isButtonDisabled}">
+                  Play
+                </button>                
+                <button  class="mat-button-like reset " (click)="resetGame()" [ngClass]="{'disabled-button': isButtonDisabled}">
+                  Reset Game
+                </button>
+            </div>
+            <form [formGroup]="episodesForm" >
+            <div class="material-input-container">
+                <label for="Episodes">Episodes:</label>
+                <input type="text" [value]="episodesForm.controls['episodes'].value" formControlName="episodes">
+                <div *ngIf="loading" class="loading"></div>
+                <button  *ngIf="completed" class="mat-button-like download" (click)="downloadModel()" >
+                  <i class="fa fa-download"></i>
+                </button>
+              </div>
+              <div class="material-input-container">
+                <label for="Epsilon">Epsilon:</label>
+                <input type="text" value="1.0">
+              </div>
+              <div class="material-input-container">
+                <label for="alpha">Alpha:</label>
+                <input type="text" value="0.001">
+              </div>
+            </form>
+              <div *ngIf="displayTimer" class="time-container">
+                <label class="train-label" for="training-time">Traning Time:</label>
+                <p class="time-p">{{ formatTime(elapsedTime) }}</p>
+              </div>
+        </div>
+
+    </div>
+    <h3 *ngIf="completed" [ngClass]="{'play-now': completed}">Click play</h3>
+    <div class="table-container" >
+    <table >
+        <tr *ngFor="let row of gameBoard | toMatrix; let rowIndex = index">
+          <td
+            *ngFor="let value of row; let colIndex = index"
+            (click)="onCellClick(value, rowIndex, colIndex)"
+            class="card"
+            [ngClass]="{'click-card': !letsPlay}"
+            
+          >
+          
+            <span>{{ value === 0 ? "" : value }}</span>
+          </td>
+        </tr>
+      </table>
+      <div [class.overlay]="showOverlay">{{winner}}</div>
+    </div>
+
+</div>
+  </div>
