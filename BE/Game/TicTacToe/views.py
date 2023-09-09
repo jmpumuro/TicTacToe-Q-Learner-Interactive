@@ -86,9 +86,13 @@ class TrainAgentView(GameBoardMixin, APIView):
             # Parse episodes from JSON
             if isinstance(episodes, str):
                 episodes = json.loads(episodes)
+            if isinstance(epsilon, str):
+                epsilon = json.loads(epsilon)
+            if isinstance(gamma, str):
+                gamma = json.loads(gamma)
 
             # Train the agent
-            q_learning.train(episodes)
+            q_learning.train(episodes,epsilon,gamma)
 
             # Save the trained Q-values
             q_learning.save_model('/Users/joempumuro/TicTacToe/BE/Game/TicTacToe/model')  # Update the path accordingly
@@ -106,10 +110,12 @@ class TrainAgentView(GameBoardMixin, APIView):
 
     def post(self, request):
         episodes = request.data.get('episodes')
+        epsilon = request.data.get('epsilon')
+        gamma = request.data.get('gamma')
         if episodes is None:
             return Response({'error': 'Number of episodes not provided'}, status=status.HTTP_400_BAD_REQUEST)
 
-        self.training_thread = threading.Thread(target=self.start_training_thread, args=(episodes,))
+        self.training_thread = threading.Thread(target=self.start_training_thread, args=(episodes,epsilon,gamma,))
         self.training_thread.start()
         self.training_thread.join()
 

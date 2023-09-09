@@ -49,7 +49,9 @@ class TicTacToeQLearning:
     def update_replay_buffer(self, state, action, reward, next_state):
         self.replay_buffer.append((state, action, reward, next_state))
 
-    def train(self, episodes, batch_size=32, target_network_update_freq=10):
+    def train(self, episodes, epsilon =1.0,gamma =0.99, batch_size=32, target_network_update_freq=10):
+        self.epsilon = epsilon
+        self.gamma = gamma
         for episode in range(episodes):
             game = TicTacToe()
             done = False
