@@ -20,7 +20,9 @@ export class TictactoeComponent {
   trainingStaus = ''
   completed = false
   episodesForm!: FormGroup;
-  episodes: number = 0
+  episodes: number = 0;
+  epsilon : number = 1;
+  gamma : number = .99;
   gameOver = false
 
   loading: boolean = false
@@ -72,12 +74,20 @@ export class TictactoeComponent {
     this.startTimer();
     this.episodesForm = this.formBuilder.group({
       episodes: [''], // Initialize the episodes form control
+      epsilon: [''],
+      gamma: ['']
     });
-    this.episodesForm.get('episodes')?.valueChanges.pipe(
+    this.episodesForm.valueChanges.pipe(
       distinctUntilChanged()
     ).subscribe((value) => {
-      if (value !== null && value !== '') {
-        this.episodes = value
+      if (value.episodes !== null && value.episodes !== '') {
+        this.episodes = +value.episodes
+      }
+      if (value.epsilon !== null && value.epsilon !== '') {
+        this.epsilon = +value.epsilon
+      }
+      if (value.gamma !== null && value.gamma !== '') {
+        this.gamma = +value.gamma
       }
     });
   }
@@ -182,7 +192,7 @@ export class TictactoeComponent {
     this.resetGame();
     this.isButtonDisabled = true
     this.letsPlay = false
-    this.gameService.trainAgent(this.episodes).subscribe({
+    this.gameService.trainAgent(this.episodes,this.epsilon,this.gamma).subscribe({
       next: (status: any) => {
         this.trainingStaus = status;
         if (this.trainingStaus === 'complete') {

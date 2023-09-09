@@ -18,8 +18,8 @@ export class TicTacToeService {
     return this.http.post(`${this.baseUrl}user-move/`, { position });
   }
 
-  trainAgent(episodes:number) {
-    return this.http.post(`${this.baseUrl}train-agent/`, {episodes});
+  trainAgent(episodes:number, epsilon:number, gamma:number) {
+    return this.http.post(`${this.baseUrl}train-agent/`, {episodes,epsilon,gamma});
   }
   resetGame() {
     return this.http.post(`${this.baseUrl}reset-game/`, {});

@@ -41,11 +41,18 @@
           </div>
           <div class="material-input-container">
             <label for="Epsilon">Epsilon:</label>
-            <input type="text" value="1.0" />
+            <input type="text" 
+            [value]="episodesForm.controls['Epsilon']?.value" 
+            formControlName="epsilon"
+            />
+
           </div>
           <div class="material-input-container">
-            <label for="alpha">Alpha:</label>
-            <input type="text" value="0.001" />
+            <label for="alpha">Gamma:</label>
+            <input type="text" 
+            [value]="episodesForm.controls['gamma']?.value"
+            formControlName="gamma"
+             />
           </div>
         </form>
         <div *ngIf="displayTimer" class="time-container">

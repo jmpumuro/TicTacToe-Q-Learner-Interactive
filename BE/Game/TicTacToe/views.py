@@ -77,7 +77,7 @@ class TrainAgentView(GameBoardMixin, APIView):
         with self.training_state_lock:
             self.training_state = state
 
-    def start_training_thread(self, episodes):
+    def start_training_thread(self, episodes,epsilon,gamma):
         try:
             game_manager = self.get_game_manager()
             q_learning = game_manager.q_learning  # board's Q-learning agent
