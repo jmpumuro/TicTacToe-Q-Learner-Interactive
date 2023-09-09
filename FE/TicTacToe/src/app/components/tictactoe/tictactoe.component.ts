@@ -110,7 +110,7 @@ export class TictactoeComponent {
 
   onCellClick(value: number, rowIndex: number, colIndex: number) {
     const position = this.positionDictionary[`(${rowIndex},${colIndex})`];
-
+  
     if (!this.gameOver) {
       this.gameService.userMove(position).subscribe({
         next: () => {
@@ -124,18 +124,22 @@ export class TictactoeComponent {
     setTimeout(() => {
       if (!this.gameOver) {
         this.gameService.agentMove().subscribe({
-          next: () => {
-            this.updateGameBoard();
+          next: (response) => {
+            if (response === 'Please train the agent') {
+              window.confirm('Agent needs to be trained. Please train it.');
+            } else {
+              this.updateGameBoard();
+            }
           },
           error: (error) => {
-            window.confirm('Agent needs to be trained. Would you like to train it now?');
+            // Handle other errors during agent move
             console.error('Error during agent move:', error);
           }
         });
       }
     }, 300);
-
   }
+  
 
   updateGameBoard() {
     this.gameService.getGameBoard().subscribe({
