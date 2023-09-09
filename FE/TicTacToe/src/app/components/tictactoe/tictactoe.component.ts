@@ -128,6 +128,7 @@ export class TictactoeComponent {
             this.updateGameBoard();
           },
           error: (error) => {
+            window.confirm('Agent needs to be trained. Would you like to train it now?');
             console.error('Error during agent move:', error);
           }
         });
