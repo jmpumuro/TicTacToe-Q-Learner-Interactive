@@ -74,8 +74,8 @@ export class TictactoeComponent {
     this.startTimer();
     this.episodesForm = this.formBuilder.group({
       episodes: [''], // Initialize the episodes form control
-      epsilon: [''],
-      gamma: ['']
+      epsilon: this.epsilon,
+      gamma: this.gamma
     });
     this.episodesForm.valueChanges.pipe(
       distinctUntilChanged()
@@ -211,6 +211,13 @@ export class TictactoeComponent {
         console.error('Error during training:', error);
       }
     });
+  }
+  selectedValue: string = 'X';
+
+  onSliderChange(event: Event) {
+    // Cast the event target to HTMLInputElement to access the value
+    const target = event.target as HTMLInputElement;
+    this.selectedValue = target.value;
   }
 
 }

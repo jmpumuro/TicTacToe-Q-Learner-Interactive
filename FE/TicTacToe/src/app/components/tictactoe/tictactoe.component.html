@@ -42,16 +42,18 @@
           <div class="material-input-container">
             <label for="Epsilon">Epsilon:</label>
             <input type="text" 
-            [value]="episodesForm.controls['Epsilon']?.value" 
+            [value]="episodesForm.controls['epsilon'].value" 
             formControlName="epsilon"
+            placeholder="1"
             />
 
           </div>
           <div class="material-input-container">
             <label for="alpha">Gamma:</label>
             <input type="text" 
-            [value]="episodesForm.controls['gamma']?.value"
+            [value]="episodesForm.controls['gamma'].value"
             formControlName="gamma"
+            placeholder="0.99"
              />
           </div>
         </form>

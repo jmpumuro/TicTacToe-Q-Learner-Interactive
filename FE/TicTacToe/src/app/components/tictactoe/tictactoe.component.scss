@@ -46,12 +46,12 @@
   }
   .time-container {
     display: flex;
-    align-items: center; /* Align items vertically at the center */
+    align-items: center;
     margin-left: 30px;
   }
   
   .train-label {
-    margin-right: 10px; /* Add some spacing between the label and paragraph */
+    margin-right: 10px; 
   }
  
   .card:hover {
@@ -87,7 +87,7 @@
   .mat-button-like.download {
     margin-top: 12px;
     background-color:transparent;
-    box-shadow: none; // This will remove the box-shadow
+    box-shadow: none; 
     
   }
   .mat-button-like:focus {
@@ -95,29 +95,28 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   }
   .mat-button-like.disabled-button {
-    background-color: whitesmoke; // or any other color you want to use
+    background-color: whitesmoke;
     cursor: not-allowed;
     pointer-events: none;
   }
   
 .table-container {
     position: relative;
-    width: 370px; /* You can modify this if needed */
-    height: 370px; /* You can modify this if needed */
+    width: 370px; 
+    height: 370px; 
   }
 .button-container{
     margin-bottom: 20px;
 }
 
 .training-card {
-    /* Apply the card styling to the training div */
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 10px;
     text-align: center;
     font-family: 'Handjet', cursive;
-    width: 350px; /* You can modify this if needed */
-    height: 350px; /* You can modify this if needed */
+    width: 350px; 
+    height: 350px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
   }
@@ -140,38 +139,37 @@
   }
   .container {
     display: flex;
-    gap: 20px; /* Adjust the gap as needed */
+    gap: 20px; 
 }
 
 
-//inputs 
-/* Basic styling for the material input container */
+
 .material-input-container {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
   }
   
-  /* Styling for the label */
+
   .material-input-container label {
     font-size: 16px;
     margin-right: 10px;
     width: 100px;
   }
   
-  /* Styling for the input */
+
   .material-input-container input {
     flex: 1;
     padding: 8px 0;
-    border: none; /* Remove the border */
-    border-bottom: 1px solid #ccc; /* Add a bottom border */
+    border: none; 
+    border-bottom: 1px solid #ccc; 
     font-size: 16px;
   }
   
-  /* Hover and focus styles for the input */
+
   .material-input-container input:hover,
   .material-input-container input:focus {
-    border-color: #c0cdcd; /* You can add hover and focus effects if needed */
+    border-color: #c0cdcd;
     outline: none;
   }
 
