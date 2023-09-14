@@ -70,7 +70,6 @@ export class TictactoeComponent {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds}`;
   }
   ngOnInit() {
-    this.resetGame();
     this.initialize();
     this.startTimer();
     this.episodesForm = this.formBuilder.group({
