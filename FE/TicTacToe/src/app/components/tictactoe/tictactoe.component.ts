@@ -125,14 +125,11 @@ export class TictactoeComponent {
       if (!this.gameOver) {
         this.gameService.agentMove().subscribe({
           next: (response) => {
-            if (response === 'Please train the agent') {
-              window.confirm('Agent needs to be trained. Please train it.');
-            } else {
               this.updateGameBoard();
-            }
           },
           error: (error) => {
             // Handle other errors during agent move
+            window.confirm('agent needs to be trained')
             console.error('Error during agent move:', error);
           }
         });

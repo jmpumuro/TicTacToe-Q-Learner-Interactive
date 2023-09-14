@@ -31,11 +31,13 @@ class AgentMoveView(GameBoardMixin, APIView):
     def get(self, request):
         game_manager = self.get_game_manager()
         agent_move = game_manager.make_agent_move(game_manager.board,game_manager.q_learning)
+        if agent_move == 'agent needs to be trained':
+            return Response({'agent_move': agent_move}, status=status.HTTP_400_BAD_REQUEST)
         return Response({'agent_move': agent_move}, status=status.HTTP_200_OK)
 
     def post(self, request):
         game_manager = self.get_game_manager()
-        game_manager.make_agent_move(game_manager.board)
+        game_manager.make_agent_move(game_manager.board,game_manager.q_learning)
         board_state = game_manager.get_board_state()
         return Response(board_state, status=status.HTTP_200_OK)
 
@@ -95,7 +97,7 @@ class TrainAgentView(GameBoardMixin, APIView):
             q_learning.train(episodes,epsilon,gamma)
 
             # Save the trained Q-values
-            q_learning.save_model('/Users/joempumuro/TicTacToe/BE/Game/TicTacToe/model')  # Update the path accordingly
+            q_learning.save_model('../model')
 
             self.set_training_state(TrainingState.COMPLETE)
         except json.JSONDecodeError as e:

@@ -41,7 +41,7 @@ class TicTacToeQLearning:
             state_tensor = self.normalize_state(state).reshape(1, 9)
             q_values = self.model.predict(state_tensor).flatten()
             available_actions = [i for i, value in enumerate(state) if value == 0]
-            q_vals_available = q_values * (np.array(state) == 0)
+            q_vals_available = q_values * (np.array(state) == np.array(0))
             available_q_vals = q_vals_available[available_actions]
             action = available_actions[np.argmax(available_q_vals)]
         return action
@@ -100,7 +100,7 @@ class TicTacToeQLearning:
             self.epsilon = max(self.epsilon * self.epsilon_decay, self.epsilon_min)
 
     def save_model(self, filename):
-        self.model.save(f"{filename}.keras")
+        self.model.save(f"{filename}.h5")
 
     def load_model(self, filename):
         self.model = tf.keras.models.load_model(filename)
