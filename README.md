@@ -1,5 +1,5 @@
 # TicTacToe-Q-Learner-Interactive
-Discover the elegance of artificial intelligence as you navigate the dynamic dance between our Q-learning agent and human intuition. Watch in awe as the agent's evolution unfolds, shaping it into a nimble strategist that meticulously adjusts its tactics through iterative learning.
+In this project, we aim to showcase the progressive development of our Q-learning agent, harnessing the power of DQN, to transform it into a sophisticated strategist. The agent learns and adapts its tactics through an iterative learning process, providing a fascinating glimpse into the evolution of artificial intelligence
 
 ## Backend set-up 
 * create virtual environment : `python -m venv env` 
