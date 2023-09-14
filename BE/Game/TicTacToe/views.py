@@ -97,7 +97,7 @@ class TrainAgentView(GameBoardMixin, APIView):
             q_learning.train(episodes,epsilon,gamma)
 
             # Save the trained Q-values
-            q_learning.save_model('../model')
+            q_learning.save_model('../agentmodel')
 
             self.set_training_state(TrainingState.COMPLETE)
         except json.JSONDecodeError as e:

@@ -25,7 +25,7 @@ class GameManager:
     def make_agent_move(self, board, q_learning):
             try:
                 # Load the Q-values from a file
-                q_learning.load_model('../model.h5')
+                q_learning.load_model('../agentmodel.h5')
 
                 # Get the current game state
                 state = board.get_state()
