@@ -62,15 +62,12 @@ class TrainingState:
 
 
 class TrainAgentView(GameBoardMixin, APIView):
-    
-    def __init__(self,config_path='/Users/joempumuro/TicTacToe-Q-Learner-Interactive/BE/config.json'):
+    def __init__(self):
         super().__init__()
         self.training_state = TrainingState.NOT_STARTED
         self.stop_training = threading.Event()
         self.training_state_lock = threading.Lock()
         self.training_thread = None
-        with open(config_path, 'r') as config_file:
-            self.config = json.load(config_file)
 
     def get_training_state(self):
         with self.training_state_lock:
@@ -96,10 +93,9 @@ class TrainAgentView(GameBoardMixin, APIView):
 
             # Train the agent
             q_learning.train(episodes,epsilon,gamma)
-    
+
             # Save the trained Q-values
-            model_path = self.config['model_path']
-            q_learning.save_model(model_path)  # Update the path accordingly
+            q_learning.save_model('/Users/joempumuro/TicTacToe/BE/Game/TicTacToe/model')  # Update the path accordingly
 
             self.set_training_state(TrainingState.COMPLETE)
         except json.JSONDecodeError as e:
