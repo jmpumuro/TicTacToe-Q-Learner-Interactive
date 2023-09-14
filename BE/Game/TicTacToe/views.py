@@ -30,23 +30,14 @@ class GameBoardView(GameBoardMixin, APIView):
 class AgentMoveView(GameBoardMixin, APIView):
     def get(self, request):
         game_manager = self.get_game_manager()
-        agent_move = game_manager.make_agent_move(game_manager.board, game_manager.q_learning)
-
-        if agent_move == 'Please train the agent':
-            return Response({'error': 'Please train the agent first'}, status=status.HTTP_400_BAD_REQUEST)
-
+        agent_move = game_manager.make_agent_move(game_manager.board,game_manager.q_learning)
         return Response({'agent_move': agent_move}, status=status.HTTP_200_OK)
 
     def post(self, request):
         game_manager = self.get_game_manager()
-        agent_move = game_manager.make_agent_move(game_manager.board, game_manager.q_learning)
-
-        if agent_move == 'Please train the agent':
-            return Response({'error': 'Please train the agent first'}, status=status.HTTP_400_BAD_REQUEST)
-
+        game_manager.make_agent_move(game_manager.board)
         board_state = game_manager.get_board_state()
         return Response(board_state, status=status.HTTP_200_OK)
-
 
 class UserMoveView(GameBoardMixin, APIView):
     def post(self, request):

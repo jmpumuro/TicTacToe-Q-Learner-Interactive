@@ -1,7 +1,6 @@
 from .game import TicTacToe
 from .agent import TicTacToeQLearning
 import json
-import os
 
 class GameManager:
     _instance = None
@@ -27,22 +26,17 @@ class GameManager:
             self.is_agent_turn = True
             return position
 
-    def make_agent_move(self, board, q_learning):
+    def make_agent_move(self, board,q_learning):
         if self.is_agent_turn:
+            # Load the Q-values from a file
             model_path = self.config['model_path']
-            
-            # Check if the model file exists
-            if os.path.exists(model_path):
-                # Load the Q-values from the configuration file
-                q_learning.load_model(model_path)
+            q_learning.load_model(model_path)
 
-                # Get the current game state
-                state = board.get_state()
-                # Get the agent's move
-                action = q_learning.get_action(state)
-                # Make the agent's move on the game board
-                board.make_move(action)
-                self.is_agent_turn = False
-                return action
-            else:
-                return 'Please train the agent'
+            # Get the current game state
+            state = board.get_state()
+            # Get the agent's move
+            action = q_learning.get_action(state)
+            # Make the agent's move on the game board
+            board.make_move(action)
+            self.is_agent_turn = False
+            return action
